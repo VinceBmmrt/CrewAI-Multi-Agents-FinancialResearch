@@ -1,54 +1,73 @@
-# FinancialResearcher Crew
+# CrewAI-Multi-Agents-FinancialResearch
 
-Welcome to the FinancialResearcher Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+---
+
+🇫🇷  
+Ce projet utilise CrewAI pour orchestrer la collaboration entre des agents IA spécialisés dans la recherche financière. Le premier agent, le researcher, collecte et synthétise des informations détaillées sur une entreprise (performance, actualités, concurrents, perspectives). Le second, l’analyst, analyse ces données pour produire un rapport clair, structuré et accessible, adapté à une audience financière.  
+Chaque agent utilise un modèle de langage (LLM) paramétrable, ce qui permet d’adapter facilement le système à différentes APIs et modèles selon vos préférences (ex : OpenAI, Gemini, Mistral...).
+
+🇬🇧  
+This project uses CrewAI to orchestrate collaboration between AI agents specialized in financial research. The researcher gathers and summarizes detailed data about a company (performance, news, competitors, outlook). The analyst then analyzes this data to produce a clear, structured, and accessible financial report.  
+Each agent's LLM is fully customizable, letting you connect to any API or model you prefer (e.g., OpenAI, Gemini, Mistral...).
+
+---
+
+## Agents Configuration
+
+The LLM used by each agent is fully configurable in `config/agents.yaml`. Example agents include:
+
+- **researcher**: Senior financial researcher specializing in a given company. Gathers and synthesizes relevant information.
+- **analyst**: Market analyst and report writer who analyzes research results and produces clear, engaging reports.
+
+---
+
+## Tasks
+
+- **research_task**  
+  Conducts thorough research on a company, focusing on current status, news, history, challenges, outlook, and competitors. Produces a detailed, structured report.
+
+- **analysis_task**  
+  Analyzes research findings, writing a comprehensive market analysis report including an executive summary, key insights, and a market outlook (not for trading decisions).
+
+---
+
+## Crew Configuration
+
+The core crew is defined in `crew.py` and consists of:
+
+- Two agents (`researcher` and `analyst`) instantiated with configurable LLMs and tools.
+- Two tasks (`research_task` and `analysis_task`) performed sequentially.
+- Use of `SerperDevTool` integrated in the researcher agent for enhanced web search capabilities.
+
+---
 
 ## Installation
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+Make sure you have Python >=3.10 and <3.14 installed.
 
-First, if you haven't already, install uv:
+Install the dependency manager `uv` from Astral :  
+https://docs.astral.sh/uv/getting-started/first-steps/
 
-```bash
-pip install uv
-```
+Then, install the dependencies:  
+`uv sync`
 
-Next, navigate to your project directory and install the dependencies:
+---
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+## Usage
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+Run the project with:  
+`crewai run`
 
-- Modify `src/financial_researcher/config/agents.yaml` to define your agents
-- Modify `src/financial_researcher/config/tasks.yaml` to define your tasks
-- Modify `src/financial_researcher/crew.py` to add your own logic, tools and specific args
-- Modify `src/financial_researcher/main.py` to add custom inputs for your agents and tasks
+This command will launch the sequential execution of the research and analysis tasks by the configured agents. The final report will be saved as `output/report.md`.
 
-## Running the Project
+---
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+## Customization
 
-```bash
-$ crewai run
-```
+- Add your `OPENAI_API_KEY` or other API keys in the `.env` file.
+- Modify `config/agents.yaml` to change or add agents and their LLM configurations.
+- Modify `config/tasks.yaml` to customize tasks.
+- Adjust `crew.py` to extend logic, add tools, or change process flows.
+- Modify `main.py` to provide custom inputs like the target company name.
 
-This command initializes the financial_researcher Crew, assembling the agents and assigning them tasks as defined in your configuration.
-
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
-
-## Understanding Your Crew
-
-The financial_researcher Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
-
-## Support
-
-For support, questions, or feedback regarding the FinancialResearcher Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
-
-Let's create wonders together with the power and simplicity of crewAI.
+---
